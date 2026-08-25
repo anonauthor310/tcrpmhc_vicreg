@@ -6,8 +6,10 @@ data/raw/**
 # Large local artefacts.
 data/embeddings/
 outputs/
+models/checkpoints/
 *.npz
 *.pt
+*.pth
 *.ckpt
 
 # Frozen processed splits are committed for reproducibility.

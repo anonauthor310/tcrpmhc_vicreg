@@ -47,7 +47,8 @@ requirements of the underlying resources listed below.
 - Resource: curated TCR–epitope specificity records used as positive
   interactions.
 - Source: <https://vdjdb.cdr3.net/> and <https://github.com/antigenomics/vdjdb-db>
-- Terms: CC BY 4.0 as stated by the VDJdb project; cite the VDJdb paper.
+- Terms: GNU Affero General Public License v3.0 (AGPL-3.0), as specified by
+  the official VDJdb repository. Cite the VDJdb paper.
 - Use here: positive TCR–pMHC triples, concatenated with the IEDB-derived table.
 
 ## IMMREP25 benchmark

@@ -51,8 +51,9 @@ PYTHONPATH=. python experiments/run_five_seed.py --family onehot
 PYTHONPATH=. python -m src.representations.export_raw_esmc
 PYTHONPATH=. python experiments/run_five_seed.py --family raw_esmc
 
-# LoRA ESMC: train/export LoRA adapters first (not the raw shards above).
-# See data/README.md and src/representations/export_lora_esmc.py.
+# LoRA ESMC: train the three MLM adapters, export shards (including IMMREP), then VICReg.
+# See data/README.md, train_lora_esmc.py and export_lora_esmc.py.
+PYTHONPATH=. python -m src.representations.train_lora_esmc
 PYTHONPATH=. python -m src.representations.export_lora_esmc
 PYTHONPATH=. python experiments/run_five_seed.py --family lora_esmc
 

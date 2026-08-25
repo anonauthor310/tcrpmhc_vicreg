@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
 """Export LoRA-adapted ESMC-300m per-residue embedding shards.
 
-Loads the three LoRA modality encoders from locally trained checkpoints and
-writes the same shard layout as ``export_raw_esmc.py``. This is not a frozen
-``esmc_300m`` export: train the adapters first, then run this module. See
-``data/README.md``.
+Loads the three LoRA modality encoders written by
+``python -m src.representations.train_lora_esmc`` and writes the same shard
+layout as ``export_raw_esmc.py``. This does not train the adapters.
 
+    PYTHONPATH=. python -m src.representations.train_lora_esmc
     PYTHONPATH=. python -m src.representations.export_lora_esmc
 """
 
@@ -22,6 +22,13 @@ from typing import Any, Dict, List, Optional, Sequence, Tuple
 import pandas as pd
 import torch
 from torch.utils.data import DataLoader, Dataset
+
+from src.representations.lora import (
+    DEFAULT_LORA_ALPHA,
+    DEFAULT_LORA_DROPOUT,
+    DEFAULT_LORA_R,
+    LORA_TARGET_MODULES,
+)
 
 REPO = Path(__file__).resolve().parents[2]
 
@@ -41,12 +48,12 @@ class ExportConfig:
     chunk_size: int = 100
     dtype: str = "float16"
     device: str = "cuda"
-    splits: Tuple[str, ...] = ("train", "val", "test")
+    splits: Tuple[str, ...] = ("train", "val", "test", "immrep_test")
     max_rows: Optional[int] = None
     clear_existing: bool = True
-    lora_r: int = 8
-    lora_alpha: int = 32
-    lora_dropout: float = 0.05
+    lora_r: int = DEFAULT_LORA_R
+    lora_alpha: int = DEFAULT_LORA_ALPHA
+    lora_dropout: float = DEFAULT_LORA_DROPOUT
 
 
 def load_split_sequences(
@@ -167,14 +174,17 @@ def load_lora_encoders(
     }
     for name, path in ckpt_map.items():
         if not path.exists():
-            raise FileNotFoundError(f"Missing {name} checkpoint: {path}")
+            raise FileNotFoundError(
+                f"Missing {name} checkpoint: {path}. "
+                "Train adapters first with: PYTHONPATH=. python -m src.representations.train_lora_esmc"
+            )
 
     lora_cfg = LoraConfig(
         r=lora_r,
         lora_alpha=lora_alpha,
         lora_dropout=lora_dropout,
         bias="none",
-        target_modules=["out_proj", "layernorm_qkv.1"],
+        target_modules=list(LORA_TARGET_MODULES),
     )
 
     print(f"Loading LoRA encoders from {checkpoint_dir} on {device} ...", flush=True)
@@ -402,8 +412,8 @@ def parse_args() -> argparse.Namespace:
     p.add_argument("--device", default=ExportConfig.device)
     p.add_argument(
         "--splits",
-        default="train,val,test",
-        help="Comma-separated splits to export (e.g. val,test).",
+        default="train,val,test,immrep_test",
+        help="Comma-separated splits to export.",
     )
     p.add_argument("--max-rows", type=int, default=None, help="Optional per-split cap for smoke tests.")
     p.add_argument(

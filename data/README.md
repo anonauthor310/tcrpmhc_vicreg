@@ -105,7 +105,9 @@ model = ESMC.from_pretrained("esmc_300m")
 ```
 
 Accept the model terms at download time. LoRA adapters for the LoRA family are
-trained locally; see `src/representations/export_lora_esmc.py`.
+trained locally with `python -m src.representations.train_lora_esmc` and then
+exported with `python -m src.representations.export_lora_esmc`. The adapter
+checkpoints are not shipped.
 
 ## Running the generator
 
@@ -136,8 +138,12 @@ ESMC shards are large and are not committed. Export them locally:
 
 ```bash
 PYTHONPATH=. python -m src.representations.export_raw_esmc
+
+# LoRA family: train adapters, then export all four splits.
+PYTHONPATH=. python -m src.representations.train_lora_esmc
 PYTHONPATH=. python -m src.representations.export_lora_esmc
 ```
 
 They are written under `data/embeddings/` (gitignored), matching the paths in
-`configs/raw_esmc.yaml` and `configs/lora_esmc.yaml`.
+`configs/raw_esmc.yaml` and `configs/lora_esmc.yaml`. Adapter checkpoints are
+written to `models/checkpoints/` (also gitignored).
