@@ -1,0 +1,8 @@
+family: raw_esmc
+batch_size: 8
+run_tag: esm_vicreg_raw_complete
+checkpoint_root: outputs/checkpoints/esm_vicreg_raw_complete
+output_root: outputs/esm_vicreg_raw_complete
+figure_root: figures/esm_vicreg_raw_complete
+pretrained_embed_root: data/embeddings/raw_esmc_300m
+pretrained_immrep_shard_dir: data/embeddings/raw_esmc_300m/immrep_test

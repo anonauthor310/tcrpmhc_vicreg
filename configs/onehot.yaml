@@ -1,0 +1,6 @@
+family: onehot
+batch_size: 64
+run_tag: onehot_vicreg_complete
+checkpoint_root: outputs/checkpoints/onehot_vicreg_complete
+output_root: outputs/onehot_vicreg_complete
+figure_root: figures/onehot_vicreg_complete

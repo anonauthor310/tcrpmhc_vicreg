@@ -1,0 +1,29 @@
+# Third-party raw inputs. Never commit the IMGT FASTA (CC BY-ND) or the
+# IEDB/VDJdb exports.
+data/raw/**
+!data/raw/.gitkeep
+
+# Large local artefacts.
+data/embeddings/
+outputs/
+*.npz
+*.pt
+*.ckpt
+
+# Frozen processed splits ARE committed (small, redistributable metadata).
+!data/processed/*.csv.gz
+!data/processed/CHECKSUMS.sha256
+!data/processed/SPLIT_COUNTS.json
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+.env
+.ipynb_checkpoints/
+
+# Editor / OS
+.DS_Store
+.idea/
+.vscode/
+*.swp

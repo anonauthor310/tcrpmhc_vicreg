@@ -1,0 +1,13 @@
+protocol,model_name,mean,std,count
+frequency_capped,finetuned_esmc_meanpool,0.5676651497350578,,1
+frequency_capped,finetuned_esmc_vicreg,0.7274055818115122,0.0047227360129326,5
+frequency_capped,onehot_composition,0.5633117192175581,,1
+frequency_capped,onehot_vicreg,0.6654314161507819,0.0029950414525824,5
+frequency_capped,pretrained_esmc_meanpool,0.5485748059832973,,1
+frequency_capped,raw_esmc_vicreg,0.7300714712638878,0.0056992317978642,5
+peptide_balanced,finetuned_esmc_meanpool,0.5545632653061224,,1
+peptide_balanced,finetuned_esmc_vicreg,0.7070416326530612,0.0082539061720522,5
+peptide_balanced,onehot_composition,0.5485551020408164,,1
+peptide_balanced,onehot_vicreg,0.6652702040816326,0.0094979576050444,5
+peptide_balanced,pretrained_esmc_meanpool,0.5555020408163265,,1
+peptide_balanced,raw_esmc_vicreg,0.7123608163265306,0.0092472167205175,5

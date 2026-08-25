@@ -1,0 +1,8 @@
+metric,Input: one-hot,Input: raw ESMC,Input: LoRA ESMC,One-hot + VICReg,Raw ESMC + VICReg,LoRA ESMC + VICReg
+Internal global AUROC,0.51,0.50,0.53,0.72,0.79,0.79 ± 0.01
+Internal peptide-weighted AUROC,0.50,0.50,0.54,0.73 ± 0.01,0.77,0.77
+IMMREP peptide-macro AUROC,0.51,0.50,0.50,0.50 ± 0.01,0.51 ± 0.01,0.51
+IMMREP McClish pAUC@0.1,0.50,0.50,0.51,0.50,0.50,0.50
+Unseen TCR (n=3290) global AUROC,0.51,0.50,0.53,0.73,0.80,0.80
+Unseen MHC (n=264) global AUROC,0.45,0.50,0.48,0.59 ± 0.02,0.60 ± 0.03,0.61 ± 0.03
+Unseen TCR + peptide (n=240) global AUROC,0.54,0.45,0.55,0.60 ± 0.02,0.73 ± 0.02,0.71 ± 0.02

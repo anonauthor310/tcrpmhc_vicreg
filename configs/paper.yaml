@@ -1,0 +1,24 @@
+# Shared paper operating point. Family YAMLs override batch size and paths.
+family: null
+d: 256
+rL: 8
+rD: 16
+R_PH: 0.7
+alpha: 25.0
+beta: 25.0
+delta: 1.0
+lr: 3.0e-4
+weight_decay: 0.01
+dropout: 0.1
+epochs: 30
+min_epochs: 10
+patience: 10
+seeds: [31, 37, 43, 49, 55]
+selection_metric: val_peptide_weighted_auroc
+missing_chain_policy: complete_only
+train_csv: data/processed/train.csv.gz
+val_csv: data/processed/val.csv.gz
+test_csv: data/processed/test.csv.gz
+immrep_csv: data/processed/immrep_test.csv.gz
+save_latents: true
+overwrite: false

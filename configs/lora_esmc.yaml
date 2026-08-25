@@ -1,0 +1,10 @@
+family: lora_esmc
+batch_size: 8
+run_tag: esm_vicreg_finetuned_complete
+checkpoint_root: outputs/checkpoints/esm_vicreg_finetuned_complete
+output_root: outputs/esm_vicreg_finetuned_complete
+figure_root: figures/esm_vicreg_finetuned_complete
+finetuned_embed_root: data/embeddings/lora_esmc_300m
+finetuned_immrep_shard_dir: data/embeddings/lora_esmc_300m/immrep_test
+pretrained_embed_root: data/embeddings/raw_esmc_300m
+pretrained_immrep_shard_dir: data/embeddings/raw_esmc_300m/immrep_test

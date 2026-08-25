@@ -1,0 +1,7 @@
+protocol,model_name,mean,std,count
+peptide_balanced,finetuned_esmc_meanpool,0.5545632653061224,,1
+peptide_balanced,finetuned_esmc_vicreg,0.7070416326530612,0.008253906172052296,5
+peptide_balanced,onehot_composition,0.5485551020408164,,1
+peptide_balanced,onehot_vicreg,0.6652702040816326,0.009497957605044488,5
+peptide_balanced,pretrained_esmc_meanpool,0.5555020408163265,,1
+peptide_balanced,raw_esmc_vicreg,0.7123608163265306,0.00924721672051752,5
