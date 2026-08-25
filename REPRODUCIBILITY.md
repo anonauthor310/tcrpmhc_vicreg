@@ -2,7 +2,12 @@
 
 All commands run from the repository root with `PYTHONPATH=.` and the
 `tcrpmhc-vicreg` environment active. Anything marked (no GPU) reads committed
-CSVs or saved latents instead of retraining.
+CSVs instead of retraining.
+
+Large checkpoints and latent .npz files are not committed. Analyses that
+operate on saved latents require the validation-selected exports produced by
+the corresponding paper runs. The compact result CSVs and final figure inputs
+used in the manuscript are committed under results/.
 
 ## Data
 
@@ -60,7 +65,7 @@ TCR norm, dot product, cosine and full negative-MSE scoring. Gives TCR-norm
 AUROC 0.500 on the occurrence-matched test set.
 
 ```bash
-PYTHONPATH=. python experiments/score_decomposition.py   # uses saved latents (no GPU)
+PYTHONPATH=. python experiments/score_decomposition.py   # requires latent exports from the paper runs; no GPU once generated
 ```
 
 Output: `results/score_decomposition.csv`.
@@ -83,18 +88,21 @@ Panels (b) and (c) group TCRs by peptide sequence irrespective of MHC. Panel (d)
 ranks explicit peptide–MHC complexes.
 
 ```bash
-# 2b same-peptide recovery
+# 2b/2c/2d require latent exports from the paper runs; no GPU once generated
 PYTHONPATH=. python experiments/same_peptide_recovery.py --split test
-
-# 2c k-nearest-neighbour same-peptide enrichment, k in {5, 10, 20}
 PYTHONPATH=. python experiments/neighbour_enrichment.py
-
-# 2d multi-cognate retrieval (Recall@10)
 PYTHONPATH=. python experiments/multicognate_retrieval.py --split test
 
-# assemble the four panels (no GPU)
+# assemble the four panels from committed CSVs (no GPU)
 PYTHONPATH=. python figures/make_figure2.py --split test
 ```
+
+Positive test interactions from peptides with at least five TCRs are used;
+groups are capped at 25 TCR rows by seeded subsampling. For each query, the
+same-peptide fraction among its k nearest neighbours is compared with the
+same-peptide frequency expected from the composition of the sampled pool.
+Reported enrichment is the pooled mean observed purity divided by the pooled
+mean expected purity.
 
 The design constants appear in the output tables:
 
@@ -103,8 +111,6 @@ The design constants appear in the output tables:
 | Panel (b) same-peptide pairs | 35 peptides × 10 pairs = 350 |
 | Panel (b) matched different-peptide pairs | 350 |
 | Panel (c) neighbourhood sizes | k ∈ {5, 10, 20} |
-| Panel (c) query set | full positive internal test; k-NN after identical-TCR exclusion |
-| Panel (c) eligible peptides | 35 peptides with ≥ 5 distinct TCRs (1,498 queries; same eligibility as 2b) |
 | Panel (d) queries | 77 multi-cognate TCRs |
 | Panel (d) gallery | 345 unique peptide–MHC complexes |
 | Panel (d) random Recall@10 | 10 / 345 = 2.9% |

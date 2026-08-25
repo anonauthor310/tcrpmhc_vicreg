@@ -1,9 +1,9 @@
 # Data acquisition and preparation
 
-Nothing in this directory redistributes a third-party dataset, sequence database
-or model weight. `data/processed/` holds only our own processed split metadata:
-identifiers, sequences that are already in the public sources, labels and decoy
-provenance. See [../THIRD_PARTY.md](../THIRD_PARTY.md) for terms.
+Original third-party database exports and model weights are not included in
+this directory. data/processed/ contains the frozen processed splits used for
+the paper, including source-derived sequence fields required for reproduction.
+These remain subject to the terms described in ../THIRD_PARTY.md.
 
 ## Generator scripts and frozen splits
 

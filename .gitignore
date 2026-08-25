@@ -10,7 +10,7 @@ outputs/
 *.pt
 *.ckpt
 
-# Frozen processed splits ARE committed (small, redistributable metadata).
+# Frozen processed splits are committed for reproducibility.
 !data/processed/*.csv.gz
 !data/processed/CHECKSUMS.sha256
 !data/processed/SPLIT_COUNTS.json

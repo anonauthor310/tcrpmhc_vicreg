@@ -1,9 +1,10 @@
 # Third-party resources
 
-The MIT licence in `LICENSE` covers this repository's code only. None of the
-resources below are redistributed here; each must be obtained from its own
-source under its own terms. Versions/releases listed are the ones used for the
-reported results.
+The MIT licence in LICENSE covers this repository's code only. Original
+third-party database exports and model weights are not redistributed. The
+frozen processed splits contain source-derived sequence fields required for
+reproducibility; those fields remain subject to the licences and attribution
+requirements of the underlying resources listed below.
 
 ## ESMC-300M (protein language model)
 

@@ -92,9 +92,12 @@ dependencies; `requirements-lock.txt` pins the set used for the reported numbers
 
 ## Data
 
-No third-party dataset, sequence database or model weight is redistributed.
-`data/README.md` gives releases and download steps for IEDB/VDJdb positives,
-IMMREP25, ESMC-300M weights, and IPD-IMGT/HLA 3.60.0 `hla_prot.fasta`.
+Original third-party database exports and model weights are not redistributed.
+The frozen processed splits contain source-derived sequence fields required to
+reproduce the reported analyses and remain subject to the terms of the
+underlying resources; see THIRD_PARTY.md. `data/README.md` gives releases and
+download steps for IEDB/VDJdb positives, IMMREP25, ESMC-300M weights, and
+IPD-IMGT/HLA 3.60.0 `hla_prot.fasta`.
 
 MHC sequences come from IPD-IMGT/HLA (records named as HLA alleles). The
 manuscript says "MHC"; code columns such as `HLA_sequence` mean the same
