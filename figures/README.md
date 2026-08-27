@@ -3,7 +3,13 @@
 | File | Paper item | Produced by |
 |---|---|---|
 | `test_geometry_multipanel.png` | Figure 2 | `PYTHONPATH=. python figures/make_figure2.py --split test` |
-| `stagewise_diagnostic.png` | Stagewise transfer diagnostic | `PYTHONPATH=. python experiments/stagewise_transfer.py` |
+
+The stagewise diagnostic figure is a PDF written by
+`experiments/stagewise_transfer.py` to
+`results/paper_analysis/immrep_transfer_stage_diagnostic/stagewise_diagnostic_figure.pdf`
+(and the same name under `figures/paper_analysis/immrep_transfer_stage_diagnostic/`
+when that script is rerun). It is not `figures/stagewise_diagnostic.png`. Table 6
+is assembled from committed CSVs by `PYTHONPATH=. python scripts/make_table6.py`.
 
 Figure 1 is a hand-drawn schematic of the architecture and is not part of this
 repository.

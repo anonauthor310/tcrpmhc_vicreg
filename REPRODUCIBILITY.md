@@ -43,7 +43,8 @@ Outputs: `results/main_results.csv`. The novelty-regime rows come from
 
 ## Hyperparameter sweep (appendix)
 
-Single seed (31), α = β ∈ {1, 25, 50} × d ∈ {64, 128, 256}, δ = 1. Selection used
+Single seed (31), $\lambda=\mu\in\{1,25,50\}$, $d\in\{64,128,256\}$, and $\nu=1$
+(alpha, beta, and delta in the configuration files). Selection used
 validation peptide-weighted AUROC only; the test and IMMREP columns are
 diagnostic.
 
@@ -79,15 +80,40 @@ Output: `results/score_decomposition.csv`.
 
 ## Stagewise transfer diagnostic
 
-Extracts the fixed input, pre-expander and final latent representations, then
-computes pairwise MSE, cosine distance, norm ratio, covariance-trace ratio and
-Cliff's δ between internal test and IMMREP.
+`experiments/stagewise_transfer.py` extracts the fixed input, pre-expander and
+final latent representations from validation-selected checkpoints, then
+compares internal test with IMMREP (pairwise cosine, latent norm,
+covariance-trace, and Cliff's δ). Regenerating it needs those checkpoints.
+
+It does **not** write `results/stagewise_transfer.csv` or
+`figures/stagewise_diagnostic.png`. It writes several files under
+`results/paper_analysis/immrep_transfer_stage_diagnostic/` and a PDF,
+`stagewise_diagnostic_figure.pdf`, in that folder and under
+`figures/paper_analysis/immrep_transfer_stage_diagnostic/`.
+
+The committed `results/stagewise_transfer.csv` is a copy of the geometry
+summary (cosine / covariance / norm). It does not contain Table 6.
 
 ```bash
 PYTHONPATH=. python experiments/stagewise_transfer.py     # loads validation-selected checkpoints
 ```
 
-Outputs: `results/stagewise_transfer.csv` and `figures/stagewise_diagnostic.png`.
+## Table 6 — stagewise TCR geometry (IMMREP vs internal test)
+
+MSE ratio (IMMREP / test pairwise MSE), cosine Δ (IMMREP − test), latent-norm
+ratio, covariance-trace ratio, and Cliff's δ on internal test vs IMMREP.
+
+| Column | Source file under `results/paper_analysis/immrep_transfer_stage_diagnostic/` |
+|---|---|
+| MSE ratio, norm ratio, covariance ratio | `stagewise_unnormalised_mse_summary.csv` (`immrep_div_test`, TCR) |
+| cosine Δ | `localisation_table.csv` (`median_pairwise_cosine`, `immrep_minus_test`) |
+| Test δ, IMMREP δ | `localisation_table.csv` (`cliffs_delta_pn_vs_pp`, `test` / `immrep`) |
+
+```bash
+PYTHONPATH=. python scripts/make_table6.py                # from committed CSVs (no GPU)
+```
+
+Output: `results/table6.csv`.
 
 ## Figure 2 — geometry multipanel
 

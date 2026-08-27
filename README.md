@@ -127,8 +127,8 @@ src/data/             splits, occurrence-matched decoys
 src/trainers/         per-family training loops
 experiments/          five-seed run, sweep, controls, Figure 2, diagnostics
 results/              CSV outputs behind the paper tables
-scripts/make_table1.py
-figures/make_figure2.py
+scripts/              make_table1.py, make_table6.py
+figures/              make_figure2.py
 ```
 
 ## Licences
