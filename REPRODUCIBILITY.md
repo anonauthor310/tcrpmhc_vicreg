@@ -91,8 +91,10 @@ Outputs: `results/stagewise_transfer.csv` and `figures/stagewise_diagnostic.png`
 
 ## Figure 2 — geometry multipanel
 
-Panels (b) and (c) group TCRs by peptide sequence irrespective of MHC. Panel (d)
-ranks explicit peptide–MHC complexes.
+Panels (b) and (c) group TCRs by peptide sequence; in this evaluation split no
+peptide appears with a differing MHC, so peptide grouping and pMHC grouping
+coincide and the figure labels them as pMHC. Panel (d) ranks explicit
+peptide–MHC complexes.
 
 ```bash
 # 2b/2c/2d require latent exports from the paper runs; no GPU once generated

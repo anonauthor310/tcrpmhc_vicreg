@@ -2,11 +2,12 @@
 """Assemble Figure 2 from saved CSVs (no retraining).
 
   (a) schematic of pMHC-aligned TCR geometry (drawn, not data)
-  (b) same-peptide recovery AUROC
-  (c) same-peptide neighbourhood enrichment, k in {5, 10, 20}
+  (b) same-pMHC recovery AUROC
+  (c) same-pMHC neighbourhood enrichment, k in {5, 10, 20}
   (d) known-cognate pMHC Recall@10
 
-(b) and (c) group TCRs by peptide sequence irrespective of MHC.
+(b) and (c) group TCRs by peptide sequence; in this split no peptide appears
+with a differing MHC, so peptide grouping and pMHC grouping coincide.
 (d) ranks explicit peptide-MHC complexes. VICReg points are mean ± SD over
 seeds 31/37/43/49/55; input baselines are a single marker.
 
@@ -72,7 +73,7 @@ LEARNED = {"onehot_vicreg", "raw_esmc_vicreg", "finetuned_esmc_vicreg"}
 SEEDS = (31, 37, 43, 49, 55)
 
 # Schematic-only palette. Deliberately disjoint from the model colours above so
-# that "colour = associated peptide" in panel (a) is not read as a model identity.
+# that "colour = associated pMHC" in panel (a) is not read as a model identity.
 PEPTIDE_A = "#e6550d"
 PEPTIDE_B = "#6a51a3"
 
@@ -102,7 +103,7 @@ def tint(color: str, amount: float) -> tuple[float, float, float]:
 def draw_tcr(ax: plt.Axes, x: float, y: float, color: str, s: float = 1.0) -> None:
     """Draw a minimal alpha/beta TCR cartoon centred on (x, y).
 
-    Upper (variable) domains carry the associated-peptide colour, lower
+    Upper (variable) domains carry the associated-pMHC colour, lower
     (constant) domains a lighter tint, and three dots stand in for the CDR loops.
     """
     edge = "0.2"
@@ -240,7 +241,7 @@ def panel_schematic(ax: plt.Axes) -> None:
     ax.text(
         2.45,
         y_mid - 1.24,
-        "same associated peptide\n= smaller TCR\u2013TCR distance",
+        "same associated pMHC\n= smaller TCR\u2013TCR distance",
         fontsize=8.5,
         color="0.2",
         ha="center",
@@ -253,7 +254,7 @@ def panel_schematic(ax: plt.Axes) -> None:
     ax.text(
         5.35,
         y_mid + 0.92,
-        "different associated peptide\n= larger TCR\u2013TCR distance",
+        "different associated pMHC\n= larger TCR\u2013TCR distance",
         fontsize=8.5,
         color="0.2",
         ha="center",
@@ -276,7 +277,7 @@ def panel_schematic(ax: plt.Axes) -> None:
     ax.text(
         5.0,
         0.52,
-        "colour = associated peptide   \u00b7   MHC context not used for grouping",
+        "colour = associated pMHC",
         fontsize=8,
         style="italic",
         color="0.45",
@@ -335,10 +336,10 @@ def panel_auroc(ax: plt.Axes, split: str) -> None:
     ax.set_xticklabels(
         [TICK_LABELS[m] for m in models], rotation=0, ha="center", fontsize=9
     )
-    ax.set_ylabel("Same-peptide recovery AUROC", fontsize=11)
+    ax.set_ylabel("Same-pMHC recovery AUROC", fontsize=11)
     ax.tick_params(axis="y", labelsize=9)
     ax.set_ylim(0.45, 0.85)
-    ax.set_title("(b) Same-peptide recovery", fontsize=12, loc="left")
+    ax.set_title("(b) Same-pMHC recovery", fontsize=12, loc="left")
     style_spines(ax)
 
 
@@ -387,10 +388,10 @@ def panel_knn(ax: plt.Axes, split: str) -> None:
     ax.axhline(1.0, color="0.55", linestyle="--", linewidth=1.0, zorder=1)
     ax.set_xticks(ks)
     ax.set_xlabel(r"Number of neighbours, $k$", fontsize=11)
-    ax.set_ylabel("Same-peptide enrichment", fontsize=11)
+    ax.set_ylabel("Same-pMHC enrichment", fontsize=11)
     ax.tick_params(axis="both", labelsize=9)
     ax.set_ylim(0.8, None)
-    ax.set_title("(c) Same-peptide neighbourhood enrichment", fontsize=12, loc="left")
+    ax.set_title("(c) Same-pMHC neighbourhood enrichment", fontsize=12, loc="left")
     style_spines(ax)
 
 
